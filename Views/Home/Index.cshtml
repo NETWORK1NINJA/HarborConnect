@@ -1,0 +1,345 @@
+﻿@model IEnumerable<HarborConnect.Models.BoatCategory>
+<style>
+    .boat-categories-section {
+        padding: 80px 0;
+        background: #f5f9fb;
+    }
+
+    .section-heading {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+        .section-heading span {
+            color: #0088b8;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            color: #003b5c;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 10px 0 15px;
+        }
+
+        .section-heading p {
+            color: #687982;
+            font-size: 16px;
+        }
+
+    .boat-category-card {
+        background: #ffffff !important;
+        border-radius: 20px;
+        padding: 35px 30px;
+        text-align: center;
+        height: 100%;
+        border: 1px solid #dcecf2;
+        box-shadow: 0 10px 30px rgba(0, 59, 92, 0.12);
+        transition: 0.3s ease;
+    }
+
+        .boat-category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 59, 92, 0.18);
+        }
+
+    .boat-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background: #e6f7fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+    }
+
+    .boat-category-card h3 {
+        color: #003b5c;
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .boat-description {
+        color: #687982;
+        line-height: 1.6;
+        min-height: 55px;
+    }
+
+    .boat-price {
+        margin: 25px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .boat-price span {
+            color: #7b8b92;
+            font-size: 13px;
+        }
+
+        .boat-price strong {
+            color: #0088b8;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 4px 0;
+        }
+
+        .boat-price small {
+            color: #7b8b92;
+        }
+
+    .boat-book-btn {
+        display: inline-block;
+        background: #0088b8 !important;
+        color: white !important;
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: 0.3s ease;
+    }
+
+        .boat-book-btn:hover {
+            background: #003b5c !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+</style>
+
+@{
+    ViewBag.Title = "Harbor Connect";
+}
+
+<!-- HERO SECTION -->
+<section class="harbor-hero">
+    <div class="harbor-overlay">
+        <div class="container hero-content">
+
+            <span class="hero-badge">⚓ HARBOR CONNECT</span>
+
+            <h1>Explore Durban<br />From the Water</h1>
+
+            <p>
+                Book your boat online quickly, safely and conveniently.
+                Choose your boat, select your trip and enjoy your journey.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#boat-categories" class="btn btn-primary btn-lg">
+                    Book a Boat
+                </a>
+
+                <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+                    How It Works
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- QUICK INFORMATION -->
+<section class="quick-info">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon">🚤</div>
+                    <h3>Choose Your Boat</h3>
+                    <p>
+                        Select from Small, Medium and Large boats
+                        based on your needs and budget.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon">📅</div>
+                    <h3>Book Online</h3>
+                    <p>
+                        Select your preferred date and time
+                        without having to visit the harbour physically.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon">🔐</div>
+                    <h3>Secure Your Trip</h3>
+                    <p>
+                        Receive a unique booking PIN after payment
+                        to verify your trip at the harbour.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- BOAT CATEGORIES -->
+<section class="boat-categories-section" id="boat-categories">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>CHOOSE YOUR BOAT</span>
+            <h2>Find the Perfect Boat for Your Trip</h2>
+            <p>
+                Choose a boat category based on your group size and budget.
+            </p>
+        </div>
+
+        <div class="row">
+
+            @foreach (var category in Model)
+            {
+                <div class="col-md-4 mb-4">
+
+                    <div class="boat-category-card">
+
+                        <div class="boat-icon">
+                            🚤
+                        </div>
+
+                        <h3>@category.CategoryName Boat</h3>
+
+                        <p class="boat-description">
+                            @category.Description
+                        </p>
+
+                        <div class="boat-price">
+                            <span>From</span>
+                            <strong>R @category.Price.ToString("N2")</strong>
+                            <small>per trip</small>
+                        </div>
+
+                        <a href="@Url.Action("Create", "Booking", new { categoryId = category.CategoryId })"
+                           class="btn boat-book-btn">
+                            Book This Boat
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- WEATHER / OCEAN SECTION -->
+<section class="conditions-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>LIVE CONDITIONS</span>
+            <h2>Know Before You Go</h2>
+            <p>
+                Stay informed about the conditions before heading out
+                on your boat trip.
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="condition-card">
+                    <div class="condition-icon">🌤️</div>
+                    <div>
+                        <small>WEATHER</small>
+                        <h3>Durban Weather</h3>
+                        <p>
+                            Weather information will appear here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="condition-card">
+                    <div class="condition-icon">🌊</div>
+                    <div>
+                        <small>OCEAN CONDITIONS</small>
+                        <h3>Sea & Wave Information</h3>
+                        <p>
+                            Ocean and wave information will appear here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="how-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>SIMPLE & CONVENIENT</span>
+            <h2>How Harbor Connect Works</h2>
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Register</h3>
+                <p>Create your Harbor Connect account.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Choose a Boat</h3>
+                <p>Browse approved boats and choose the one you want.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Book & Pay</h3>
+                <p>Select your trip and complete your payment.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Enjoy Your Trip</h3>
+                <p>Present your PIN and enjoy your boat ride.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+    <div class="container text-center">
+
+        <h2>Ready to Explore Durban?</h2>
+
+        <p>
+            Your next adventure is only a few clicks away.
+        </p>
+
+        <a href="@Url.Action("Register", "Account")"
+           class="btn btn-light btn-lg">
+            Create Your Account
+        </a>
+
+    </div>
+</section>

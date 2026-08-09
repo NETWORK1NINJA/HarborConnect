@@ -1,0 +1,307 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<div class="container mt-5 mb-5">
+
+    <!-- HEADER -->
+
+    <div class="text-center mb-5">
+
+        <span style="
+            color:#0088b8;
+            font-weight:700;
+            letter-spacing:2px;
+        ">
+            HARBOR CONNECT
+        </span>
+
+        <h1 style="
+            color:#003b5c;
+            font-weight:700;
+            margin-top:10px;
+        ">
+            Admin Dashboard
+        </h1>
+
+        <p style="
+            color:#687982;
+            font-size:17px;
+        ">
+            Manage boats, bookings and Harbor Connect operations.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="row mb-5">
+
+        <!-- PENDING BOATS -->
+
+        <div class="col-md-3 mb-4">
+
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:35px;
+                    margin-bottom:10px;
+                ">
+                    🚤
+                </div>
+
+                <h2 style="
+                    color:#0088b8;
+                    font-weight:700;
+                ">
+                    @ViewBag.PendingBoats
+                </h2>
+
+                <p style="color:#687982;">
+                    Pending Boat Approvals
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL BOATS -->
+
+        <div class="col-md-3 mb-4">
+
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:35px;
+                    margin-bottom:10px;
+                ">
+                    ⚓
+                </div>
+
+                <h2 style="
+                    color:#003b5c;
+                    font-weight:700;
+                ">
+                    @ViewBag.TotalBoats
+                </h2>
+
+                <p style="color:#687982;">
+                    Total Boats
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL BOOKINGS -->
+
+        <div class="col-md-3 mb-4">
+
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:35px;
+                    margin-bottom:10px;
+                ">
+                    📋
+                </div>
+
+                <h2 style="
+                    color:#003b5c;
+                    font-weight:700;
+                ">
+                    @ViewBag.TotalBookings
+                </h2>
+
+                <p style="color:#687982;">
+                    Total Bookings
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PENDING BOOKINGS -->
+
+        <div class="col-md-3 mb-4">
+
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:35px;
+                    margin-bottom:10px;
+                ">
+                    ⏳
+                </div>
+
+                <h2 style="
+                    color:#d98c00;
+                    font-weight:700;
+                ">
+                    @ViewBag.PendingBookings
+                </h2>
+
+                <p style="color:#687982;">
+                    Pending Bookings
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN ACTIONS -->
+
+    <div class="row justify-content-center">
+
+        <!-- BOAT APPROVAL -->
+
+        <div class="col-md-5 mb-4">
+
+            <div style="
+                background:white;
+                padding:35px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:45px;
+                    margin-bottom:15px;
+                ">
+                    🚤
+                </div>
+
+                <h3 style="
+                    color:#003b5c;
+                    font-weight:700;
+                ">
+                    Boat Approval
+                </h3>
+
+                <p style="color:#687982;">
+                    Review boats submitted by boat owners
+                    and approve or reject them.
+                </p>
+
+                <a href="@Url.Action("Approval", "Boat")"
+                   class="btn"
+                   style="
+                       background:#0088b8;
+                       color:white;
+                       border:none;
+                       border-radius:25px;
+                       padding:11px 28px;
+                       font-weight:600;
+                   ">
+                    Manage Boat Approvals
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOOKINGS -->
+
+        <div class="col-md-5 mb-4">
+
+            <div style="
+                background:white;
+                padding:35px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+                text-align:center;
+            ">
+
+                <div style="
+                    font-size:45px;
+                    margin-bottom:15px;
+                ">
+                    📋
+                </div>
+
+                <h3 style="
+                    color:#003b5c;
+                    font-weight:700;
+                ">
+                    Booking Management
+                </h3>
+
+                <p style="color:#687982;">
+                    View and manage customer bookings
+                    made through Harbor Connect.
+                </p>
+
+                <button type="button"
+                        class="btn"
+                        style="
+                            background:#003b5c;
+                            color:white;
+                            border:none;
+                            border-radius:25px;
+                            padding:11px 28px;
+                            font-weight:600;
+                        ">
+                    Coming Soon
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN NOTICE -->
+
+    <div class="alert alert-info mt-4 text-center"
+         style="border-radius:15px;">
+
+        <strong>Admin Control Center</strong>
+
+        <div class="mt-2">
+            Use this dashboard to monitor Harbor Connect
+            activities and manage submitted boats.
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,307 @@
+﻿@model HarborConnect.Models.Booking
+
+@{
+    ViewBag.Title = "Booking Confirmation";
+}
+
+<div class="container mt-5 mb-5">
+
+    <!-- HEADER -->
+
+    <div class="text-center mb-5">
+
+        <span style="
+            color:#0088b8;
+            font-weight:700;
+            letter-spacing:2px;
+        ">
+            HARBOR CONNECT
+        </span>
+
+        <h1 style="
+            color:#003b5c;
+            font-weight:700;
+            margin-top:10px;
+        ">
+            Booking Confirmation
+        </h1>
+
+        <p style="color:#687982; font-size:17px;">
+            Your boat booking has been successfully submitted.
+        </p>
+
+    </div>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div class="alert alert-success text-center"
+         style="
+             border-radius:15px;
+             padding:18px;
+         ">
+
+        <strong>✓ Booking Submitted Successfully!</strong>
+
+        <br />
+
+        Your booking is currently waiting for confirmation.
+
+    </div>
+
+
+    <!-- BOOKING CARD -->
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-9">
+
+            <div style="
+                background:white;
+                border-radius:20px;
+                padding:35px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+            ">
+
+                <!-- BOAT INFORMATION -->
+
+                <div class="text-center mb-4">
+
+                    <div style="
+                        width:85px;
+                        height:85px;
+                        margin:0 auto 15px;
+                        border-radius:50%;
+                        background:#e6f7fc;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:40px;
+                    ">
+                        🚤
+                    </div>
+
+                    <h2 style="
+                        color:#003b5c;
+                        font-weight:700;
+                    ">
+                        @Model.Boat.BoatName
+                    </h2>
+
+                    <p style="color:#687982;">
+                        @Model.Category.CategoryName Boat
+                    </p>
+
+                </div>
+
+
+                <hr />
+
+
+                <!-- BOOKING INFORMATION -->
+
+                <div class="row mt-4">
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Booking Reference
+                        </strong>
+
+                        <p style="color:#687982;">
+                            HC-@Model.BookingId.ToString("D5")
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Booking Date
+                        </strong>
+
+                        <p style="color:#687982;">
+                            @Model.BookingDate.ToString("dd MMMM yyyy HH:mm")
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Trip Date
+                        </strong>
+
+                        <p style="color:#687982;">
+                            @Model.TripDate.ToString("dd MMMM yyyy")
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Number of Passengers
+                        </strong>
+
+                        <p style="color:#687982;">
+                            @Model.NumberOfPassengers
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Start Time
+                        </strong>
+
+                        <p style="color:#687982;">
+                            @Model.StartTime.ToString(@"hh\:mm")
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            End Time
+                        </strong>
+
+                        <p style="color:#687982;">
+                            @Model.EndTime.ToString(@"hh\:mm")
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Booking Status
+                        </strong>
+
+                        <br />
+
+                        <span style="
+                            background:#fff3cd;
+                            color:#856404;
+                            padding:7px 16px;
+                            border-radius:20px;
+                            display:inline-block;
+                            font-weight:600;
+                        ">
+                            @Model.BookingStatus
+                        </span>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <strong style="color:#003b5c;">
+                            Payment Status
+                        </strong>
+
+                        <br />
+
+                        <span style="
+                            background:#f8d7da;
+                            color:#721c24;
+                            padding:7px 16px;
+                            border-radius:20px;
+                            display:inline-block;
+                            font-weight:600;
+                        ">
+                            @Model.PaymentStatus
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <hr />
+
+
+                <!-- TOTAL -->
+
+                <div class="text-center mt-4">
+
+                    <span style="
+                        color:#7b8b92;
+                        font-size:14px;
+                    ">
+                        TOTAL BOOKING AMOUNT
+                    </span>
+
+                    <h2 style="
+                        color:#0088b8;
+                        font-weight:700;
+                    ">
+                        R @Model.TotalAmount.ToString("N2")
+                    </h2>
+
+                </div>
+
+
+                @if (!string.IsNullOrWhiteSpace(Model.SpecialRequest))
+                {
+                    <div class="alert alert-info mt-4">
+
+                        <strong>Special Request</strong>
+
+                        <p class="mb-0 mt-2">
+                            @Model.SpecialRequest
+                        </p>
+
+                    </div>
+                }
+
+
+                <!-- BUTTONS -->
+
+                <div class="text-center mt-4">
+
+                    <a href="@Url.Action("Index", "Home")"
+                       class="btn"
+                       style="
+                           background:#0088b8;
+                           color:white;
+                           border:none;
+                           border-radius:25px;
+                           padding:10px 25px;
+                           font-weight:600;
+                           margin-right:8px;
+                       ">
+                        Back to Home
+                    </a>
+
+                    <a href="@Url.Action("Create", "Booking", new { categoryId = Model.CategoryId })"
+                       class="btn"
+                       style="
+                           background:#003b5c;
+                           color:white;
+                           border:none;
+                           border-radius:25px;
+                           padding:10px 25px;
+                           font-weight:600;
+                       ">
+                        Book Another Boat
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

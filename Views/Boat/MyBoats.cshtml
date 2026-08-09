@@ -1,0 +1,206 @@
+﻿@model IEnumerable<HarborConnect.Models.Boat>
+
+@{
+    ViewBag.Title = "My Boats";
+}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+
+        <span style="
+            color:#0088b8;
+            font-weight:700;
+            letter-spacing:2px;
+        ">
+            HARBOR CONNECT
+        </span>
+
+        <h1 style="
+            color:#003b5c;
+            font-weight:700;
+        ">
+            My Boats
+        </h1>
+
+        <p style="color:#687982;">
+            View the boats you have submitted to Harbor Connect.
+        </p>
+
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var boat in Model)
+        {
+            <div style="
+                background:white;
+                border-radius:20px;
+                padding:30px;
+                margin-bottom:25px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+            ">
+
+                <div class="row">
+
+                    <div class="col-md-2 text-center">
+
+                        <div style="
+                            width:85px;
+                            height:85px;
+                            margin:auto;
+                            border-radius:50%;
+                            background:#e6f7fc;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:40px;
+                        ">
+                            🚤
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-7">
+
+                        <h3 style="
+                            color:#003b5c;
+                            font-weight:700;
+                        ">
+                            @boat.BoatName
+                        </h3>
+
+                        <p style="color:#687982;">
+                            <strong>Category:</strong>
+                            @boat.Category.CategoryName
+                        </p>
+
+                        <p style="color:#687982;">
+                            <strong>Capacity:</strong>
+                            @boat.Capacity passengers
+                        </p>
+
+                        <p style="color:#687982;">
+                            <strong>Price:</strong>
+                            R @boat.PricePerTrip.ToString("N2") per trip
+                        </p>
+
+                        <p style="color:#687982;">
+                            <strong>Location:</strong>
+                            @boat.Location
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-3 text-center">
+
+                        <p style="
+                            color:#687982;
+                            font-weight:600;
+                            margin-bottom:8px;
+                        ">
+                            Approval Status
+                        </p>
+
+                        @if (boat.ApprovalStatus == "Pending")
+                        {
+                            <span style="
+                                background:#fff3cd;
+                                color:#856404;
+                                padding:8px 18px;
+                                border-radius:20px;
+                                font-weight:600;
+                                display:inline-block;
+                            ">
+                                ⏳ Pending
+                            </span>
+                        }
+                        else if (boat.ApprovalStatus == "Approved")
+                        {
+                            <span style="
+                                background:#d4edda;
+                                color:#155724;
+                                padding:8px 18px;
+                                border-radius:20px;
+                                font-weight:600;
+                                display:inline-block;
+                            ">
+                                ✓ Approved
+                            </span>
+                        }
+                        else
+                        {
+                            <span style="
+                                background:#f8d7da;
+                                color:#721c24;
+                                padding:8px 18px;
+                                border-radius:20px;
+                                font-weight:600;
+                                display:inline-block;
+                            ">
+                                ✕ @boat.ApprovalStatus
+                            </span>
+                        }
+
+                        <p style="
+                            color:#687982;
+                            margin-top:15px;
+                        ">
+                            <strong>Boat Status:</strong>
+                            @boat.Status
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div style="
+            background:white;
+            border-radius:20px;
+            padding:60px 30px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,59,92,0.10);
+            border:1px solid #e6f0f4;
+        ">
+
+            <div style="font-size:60px;">
+                🚤
+            </div>
+
+            <h2 style="
+                color:#003b5c;
+                font-weight:700;
+            ">
+                You Have No Boats Yet
+            </h2>
+
+            <p style="color:#687982;">
+                Submit your first boat to start the approval process.
+            </p>
+
+            <a href="@Url.Action("Create", "Boat")"
+               class="btn"
+               style="
+                   background:#0088b8;
+                   color:white;
+                   border:none;
+                   border-radius:25px;
+                   padding:10px 25px;
+                   font-weight:600;
+               ">
+                Add Your Boat
+            </a>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,241 @@
+﻿@model IEnumerable<HarborConnect.Models.Boat>
+
+@{
+    ViewBag.Title = "Boat Approval";
+}
+
+<div class="container mt-5 mb-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+
+        <span style="
+            color:#0088b8;
+            font-weight:700;
+            letter-spacing:2px;
+        ">
+            HARBOR CONNECT ADMIN
+        </span>
+
+        <h1 style="
+            color:#003b5c;
+            font-weight:700;
+            margin-top:10px;
+        ">
+            Boat Approval Dashboard
+        </h1>
+
+        <p style="
+            color:#687982;
+            font-size:17px;
+        ">
+            Review and manage boats submitted by boat owners.
+        </p>
+
+    </div>
+
+
+    <!-- Pending Boats -->
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var boat in Model)
+        {
+            <div style="
+                background:white;
+                border-radius:20px;
+                padding:30px;
+                margin-bottom:25px;
+                box-shadow:0 10px 30px rgba(0,59,92,0.10);
+                border:1px solid #e6f0f4;
+            ">
+
+                <div class="row">
+
+                    <!-- Boat Icon -->
+
+                    <div class="col-md-2 text-center">
+
+                        <div style="
+                            width:90px;
+                            height:90px;
+                            margin:auto;
+                            border-radius:50%;
+                            background:#e6f7fc;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:42px;
+                        ">
+                            🚤
+                        </div>
+
+                    </div>
+
+
+                    <!-- Boat Information -->
+
+                    <div class="col-md-7">
+
+                        <h3 style="
+                            color:#003b5c;
+                            font-weight:700;
+                        ">
+                            @boat.BoatName
+                        </h3>
+
+                        <p style="color:#687982; margin-bottom:8px;">
+                            <strong>Category:</strong>
+                            @boat.Category.CategoryName
+                        </p>
+
+                        <p style="color:#687982; margin-bottom:8px;">
+                            <strong>Capacity:</strong>
+                            @boat.Capacity passengers
+                        </p>
+
+                        <p style="color:#687982; margin-bottom:8px;">
+                            <strong>Price:</strong>
+                            R @boat.PricePerTrip.ToString("N2") per trip
+                        </p>
+
+                        <p style="color:#687982; margin-bottom:8px;">
+                            <strong>Location:</strong>
+                            @boat.Location
+                        </p>
+
+                        <p style="color:#687982; margin-bottom:8px;">
+                            <strong>Description:</strong>
+                            @boat.Description
+                        </p>
+
+                        <span style="
+                            display:inline-block;
+                            background:#fff3cd;
+                            color:#856404;
+                            padding:6px 15px;
+                            border-radius:20px;
+                            font-size:13px;
+                            font-weight:600;
+                        ">
+                            ⏳ Pending Approval
+                        </span>
+
+                    </div>
+
+
+                    <!-- Actions -->
+
+                    <div class="col-md-3">
+
+                        <div style="
+                            border-left:1px solid #e6f0f4;
+                            padding-left:25px;
+                        ">
+
+                            <!-- Approve -->
+
+                            @using (Html.BeginForm(
+                                "Approve",
+                                "Boat",
+                                new { id = boat.BoatId },
+                                FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="btn btn-success btn-block"
+                                        style="
+                                            border-radius:25px;
+                                            padding:10px;
+                                            font-weight:600;
+                                            margin-bottom:12px;
+                                        "
+                                        onclick="return confirm('Are you sure you want to approve this boat?');">
+
+                                    ✓ Approve Boat
+
+                                </button>
+                            }
+
+
+                            <!-- Reject -->
+
+                            @using (Html.BeginForm(
+                                "Reject",
+                                "Boat",
+                                new { id = boat.BoatId },
+                                FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <textarea name="adminComment"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Reason for rejection (optional)"
+                                          style="
+                                              border-radius:12px;
+                                              margin-bottom:10px;
+                                          "></textarea>
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-block"
+                                        style="
+                                            border-radius:25px;
+                                            padding:10px;
+                                            font-weight:600;
+                                        "
+                                        onclick="return confirm('Are you sure you want to reject this boat?');">
+
+                                    ✕ Reject Boat
+
+                                </button>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <!-- No Pending Boats -->
+
+        <div style="
+            background:white;
+            border-radius:20px;
+            padding:60px 30px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,59,92,0.10);
+            border:1px solid #e6f0f4;
+        ">
+
+            <div style="
+                font-size:60px;
+                margin-bottom:20px;
+            ">
+                ⚓
+            </div>
+
+            <h2 style="
+                color:#003b5c;
+                font-weight:700;
+            ">
+                No Pending Boats
+            </h2>
+
+            <p style="
+                color:#687982;
+                font-size:16px;
+            ">
+                There are currently no boats waiting for approval.
+            </p>
+
+        </div>
+    }
+
+</div>

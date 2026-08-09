@@ -1,0 +1,538 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* ==========================================
+   HARBOR CONNECT HOMEPAGE
+   ========================================== */
+ 
+.harbor-hero  {
+    min-height: 620px;
+    background: linear-gradient( rgba(0, 45, 70, 0.72), rgba(0, 25, 45, 0.78) ), linear-gradient(135deg, #0077a8, #003b5c);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.harbor-overlay {
+    width: 100%;
+}
+
+.hero-content {
+    padding: 100px 15px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero-content p {
+    max-width: 650px;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #e9f7fb;
+}
+
+.hero-buttons {
+    margin-top: 35px;
+}
+
+    .hero-buttons .btn {
+        margin-right: 10px;
+        border-radius: 30px;
+        padding: 12px 28px;
+    }
+
+
+/* QUICK INFORMATION */
+
+.quick-info {
+    padding: 70px 0;
+    background: #f5f9fb;
+}
+
+.info-card {
+    background: white;
+    padding: 35px 30px;
+    text-align: center;
+    border-radius: 15px;
+    height: 100%;
+    box-shadow: 0 8px 25px rgba(0, 60, 90, 0.08);
+    transition: transform 0.3s ease;
+}
+
+    .info-card:hover {
+        transform: translateY(-7px);
+    }
+
+.info-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.info-card h3 {
+    color: #003b5c;
+    font-weight: 600;
+}
+
+.info-card p {
+    color: #667781;
+    line-height: 1.7;
+}
+
+
+/* SECTION HEADINGS */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+    .section-heading span {
+        color: #0088b8;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .section-heading h2 {
+        color: #003b5c;
+        font-size: 36px;
+        font-weight: 700;
+        margin-top: 8px;
+    }
+
+    .section-heading p {
+        color: #687982;
+    }
+
+
+/* CONDITIONS */
+
+.conditions-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.condition-card {
+    display: flex;
+    align-items: center;
+    background: #f4f9fb;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.condition-icon {
+    font-size: 45px;
+    margin-right: 25px;
+}
+
+.condition-card small {
+    color: #0088b8;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.condition-card h3 {
+    margin-top: 5px;
+    color: #003b5c;
+}
+
+.condition-card p {
+    color: #687982;
+    margin-bottom: 0;
+}
+
+
+/* HOW IT WORKS */
+
+.how-section {
+    padding: 80px 0;
+    background: #f5f9fb;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.step {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 60, 90, 0.06);
+}
+
+.step-number {
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #0088b8;
+    color: white;
+    font-weight: 700;
+}
+
+.step h3 {
+    color: #003b5c;
+}
+
+.step p {
+    color: #687982;
+}
+
+
+/* CALL TO ACTION */
+
+.cta-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0077a8, #003b5c);
+    color: white;
+}
+
+    .cta-section h2 {
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .cta-section p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .cta-section .btn {
+        color: #003b5c;
+        border-radius: 30px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 768px) {
+
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .hero-content p {
+        font-size: 17px;
+    }
+
+    .steps {
+        flex-direction: column;
+    }
+
+    .condition-card {
+        margin-bottom: 20px;
+    }
+    /* ==========================================
+   HARBOR CONNECT NAVBAR
+   ========================================== */
+
+    .navbar {
+        background: #003b5c !important;
+        padding: 14px 0;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .navbar-brand {
+        color: white !important;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+        .navbar-brand:hover {
+            color: #5ddcff !important;
+        }
+
+    .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        margin-left: 10px;
+        padding: 8px 14px !important;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+        .navbar-nav .nav-link:hover {
+            color: white !important;
+            background: #0088b8;
+        }
+
+
+    /* ==========================================
+   HARBOR CONNECT - BOAT CATEGORY CARDS
+   ========================================== */
+
+    .boat-categories-section {
+        padding: 85px 0;
+        background: #f5f9fb;
+    }
+
+    /* Section heading */
+    .section-heading {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+        .section-heading span {
+            display: inline-block;
+            color: #0088b8;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            color: #003b5c;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: #687982;
+            font-size: 16px;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+    /* Boat card */
+    .boat-category-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 35px 30px;
+        text-align: center;
+        height: 100%;
+        border: 1px solid #e6f0f4;
+        box-shadow: 0 8px 30px rgba(0, 59, 92, 0.08);
+        transition: all 0.3s ease;
+    }
+
+        /* Card hover effect */
+        .boat-category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 59, 92, 0.15);
+            border-color: #b9e7f3;
+        }
+
+    /* Boat icon */
+    .boat-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background: #e6f7fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+    }
+
+    /* Boat name */
+    .boat-category-card h3 {
+        color: #003b5c;
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    /* Description */
+    .boat-description {
+        color: #687982;
+        min-height: 55px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    /* Price section */
+    .boat-price {
+        margin: 25px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .boat-price span {
+            color: #7b8b92;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .boat-price strong {
+            color: #0088b8;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 4px 0;
+        }
+
+        .boat-price small {
+            color: #7b8b92;
+            font-size: 13px;
+        }
+
+    /* Book button */
+    .boat-book-btn {
+        display: inline-block;
+        background: #0088b8;
+        color: #ffffff !important;
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: 600;
+        border: none;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        /* Book button hover */
+        .boat-book-btn:hover {
+            background: #003b5c;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+    /* ==========================================
+   MOBILE RESPONSIVENESS
+   ========================================== */
+
+    @media (max-width: 767px) {
+
+        .boat-categories-section {
+            padding: 60px 15px;
+        }
+
+        .section-heading h2 {
+            font-size: 28px;
+        }
+
+        .boat-category-card {
+            margin-bottom: 20px;
+        }
+
+        .boat-price strong {
+            font-size: 28px;
+        }
+    }
+
+    /* HARBOR CONNECT BOAT CARDS */
+
+    .boat-categories-section {
+        padding: 80px 0;
+        background-color: #f5f9fb !important;
+    }
+
+    .boat-category-card {
+        background-color: #ffffff !important;
+        border-radius: 20px !important;
+        padding: 35px 30px !important;
+        text-align: center !important;
+        height: 100% !important;
+        border: 1px solid #dcecf2 !important;
+        box-shadow: 0 10px 30px rgba(0, 59, 92, 0.12) !important;
+    }
+
+    .boat-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background-color: #e6f7fc !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+    }
+
+    .boat-category-card h3 {
+        color: #003b5c !important;
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .boat-description {
+        color: #687982 !important;
+        line-height: 1.6;
+        min-height: 55px;
+    }
+
+    .boat-price {
+        margin: 25px 0;
+    }
+
+        .boat-price span {
+            color: #7b8b92 !important;
+            font-size: 13px;
+        }
+
+        .boat-price strong {
+            color: #0088b8 !important;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .boat-price small {
+            color: #7b8b92 !important;
+        }
+
+    .boat-book-btn {
+        background-color: #0088b8 !important;
+        color: white !important;
+        border-radius: 25px !important;
+        padding: 10px 25px !important;
+        font-weight: 600;
+        text-decoration: none !important;
+    }
+
+        .boat-book-btn:hover {
+            background-color: #003b5c !important;
+            color: white !important;
+        }
+   
+       
+}
