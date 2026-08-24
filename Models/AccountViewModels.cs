@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace HarborConnect.Models
 {
+    // External Login
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -15,11 +18,16 @@ namespace HarborConnect.Models
         public string ReturnUrl { get; set; }
     }
 
+
+    // Verification Code
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+
+        public ICollection<SelectListItem> Providers { get; set; }
+
         public string ReturnUrl { get; set; }
+
         public bool RememberMe { get; set; }
     }
 
@@ -31,6 +39,7 @@ namespace HarborConnect.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -39,18 +48,13 @@ namespace HarborConnect.Models
         public bool RememberMe { get; set; }
     }
 
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
 
+    // Login
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
@@ -62,6 +66,8 @@ namespace HarborConnect.Models
         public bool RememberMe { get; set; }
     }
 
+
+    // Registration
     public class RegisterViewModel
     {
         [Required]
@@ -70,17 +76,27 @@ namespace HarborConnect.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(
+            100,
+            MinimumLength = 6,
+            ErrorMessage = "The {0} must be at least {2} characters long."
+        )]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare(
+            "Password",
+            ErrorMessage = "The password and confirmation password do not match."
+        )]
         public string ConfirmPassword { get; set; }
     }
 
+
+    // Password Reset
     public class ResetPasswordViewModel
     {
         [Required]
@@ -89,17 +105,35 @@ namespace HarborConnect.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(
+            100,
+            MinimumLength = 6,
+            ErrorMessage = "The {0} must be at least {2} characters long."
+        )]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare(
+            "Password",
+            ErrorMessage = "The password and confirmation password do not match."
+        )]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
+    }
+
+
+    // Forgot Password
+    public class ForgotViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 
     public class ForgotPasswordViewModel
