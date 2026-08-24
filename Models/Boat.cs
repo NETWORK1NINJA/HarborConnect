@@ -6,11 +6,12 @@ namespace HarborConnect.Models
 {
     public class Boat
     {
+        [Required]
         [Key]
-        public int BoatId { get; set; }
+        public int Registration_Num { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string BoatName { get; set; }
 
         [Required]
