@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace HarborConnect.Models
 {
@@ -14,20 +11,17 @@ namespace HarborConnect.Models
         [Required]
         public string UserId { get; set; }
 
-        [Required]
-        [StringLength(150)]
+        [Required, StringLength(150)]
         public string Title { get; set; }
 
-        [Required]
-        [StringLength(1000)]
+        [Required, StringLength(1000)]
         public string Message { get; set; }
 
-        public bool IsRead { get; set; }
+        public bool IsRead { get; set; } = false;
 
         [Required]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        // Navigation property
         public virtual ApplicationUser User { get; set; }
     }
 }
