@@ -1,223 +1,309 @@
-﻿@model HarborConnect.Models.BoatCategory
+@model HarborConnect.Models.BoatCategory
 
 @{
     ViewBag.Title = "Book a Boat";
+    var availableBoats = ViewBag.AvailableBoats;
+    var hasAvailableBoats = availableBoats != null && availableBoats.Count > 0;
 }
 
-<div class="text-center mb-5">
-    <span style="color:#0088b8; font-weight:700; letter-spacing:2px;">
-        HARBOR CONNECT
-    </span>
+<div class="container py-5">
 
-    <h1 style="color:#003b5c; font-weight:700;">
-        Book Your Boat
-    </h1>
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <span class="brand-label">HARBOR CONNECT</span>
 
-    <p style="color:#687982;">
-        Select your trip details below.
-    </p>
-</div>
+        <h1 class="page-title">
+            Book Your Boat
+        </h1>
 
-<div class="row justify-content-center">
+        <p class="page-subtitle">
+            Select your trip details below.
+        </p>
+    </div>
 
-    <div class="col-md-8">
+    <!-- Booking Card -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
 
-        <div style="
-            background:white;
-            padding:40px;
-            border-radius:20px;
-            box-shadow:0 10px 30px rgba(0,59,92,0.12);
-            border:1px solid #e6f0f4;
-        ">
+            <div class="booking-card">
 
-            <div class="text-center mb-4">
+                <!-- Boat Information -->
+                <div class="text-center mb-4">
 
-                <div style="
-                    width:80px;
-                    height:80px;
-                    margin:0 auto 20px;
-                    border-radius:50%;
-                    background:#e6f7fc;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:38px;
-                ">
-                    🚤
+                    <div class="boat-icon">
+                        🚤
+                    </div>
+
+                    <h2 class="boat-category">
+                        @Model.CategoryName Boat
+                    </h2>
+
+                    <p class="boat-description">
+                        @Model.Description
+                    </p>
+
+                    <h3 class="boat-price">
+                        R @Model.Price.ToString("N2")
+                    </h3>
+
+                    <small class="price-label">
+                        Starting price per trip
+                    </small>
+
                 </div>
 
-                <h2 style="color:#003b5c;">
-                    @Model.CategoryName Boat
-                </h2>
+                <hr />
 
-                <p style="color:#687982;">
-                    @Model.Description
-                </p>
+                <!-- Booking Form -->
+                @using (Html.BeginForm("Create", "Booking", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
 
-                <h3 style="color:#0088b8;">
-                    R @Model.Price.ToString("N2")
-                </h3>
+                    <input type="hidden"
+                           name="categoryId"
+                           value="@Model.CategoryId" />
 
-                <small style="color:#7b8b92;">
-                    Starting price per trip
-                </small>
+                    <!-- Selected Category -->
+                    <div class="alert alert-info selected-category">
+                        <strong>Selected Boat Category:</strong>
+                        @Model.CategoryName
+                    </div>
 
-            </div>
+                    <!-- Boat Selection -->
+                    <div class="form-group mb-4">
+                        <label for="BoatId">Select Your Boat</label>
 
-            <hr />
+                        @if (hasAvailableBoats)
+                        {
+                            <select id="BoatId"
+                                    name="BoatId"
+                                    class="form-control"
+                                    required>
 
-            @using (Html.BeginForm("Create", "Booking", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                <input type="hidden"
-                       name="categoryId"
-                       value="@Model.CategoryId" />
-
-                <div class="alert alert-info">
-                    <strong>Selected Boat Category:</strong>
-                    @Model.CategoryName
-                </div>
-
-                <div class="form-group">
-                    <label>Select Your Boat</label>
-
-                    @if (ViewBag.AvailableBoats != null &&
-                         ViewBag.AvailableBoats.Count > 0)
-                    {
-                        <select name="BoatId"
-                                class="form-control"
-                                required>
-
-                            <option value="">-- Select a Boat --</option>
-
-                            @foreach (var boat in ViewBag.AvailableBoats)
-                            {
-                                <option value="@boat.BoatId">
-                                    @boat.BoatName - Capacity: @boat.Capacity - R @boat.PricePerTrip.ToString("N2")
+                                <option value="">
+                                    -- Select a Boat --
                                 </option>
-                            }
 
-                        </select>
+                                @foreach (var boat in availableBoats)
+                                {
+                                    <option value="@boat.BoatId">
+                                        @boat.BoatName -
+                                        Capacity: @boat.Capacity -
+                                        R @boat.PricePerTrip.ToString("N2")
+                                    </option>
+                                }
+
+                            </select>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <strong>No boats available.</strong>
+                                There are currently no approved boats available
+                                in this category.
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Trip Date -->
+                    <div class="form-group mb-4">
+                        <label for="TripDate">Trip Date</label>
+
+                        <input type="date"
+                               id="TripDate"
+                               name="TripDate"
+                               class="form-control"
+                               min="@DateTime.Today.ToString("yyyy-MM-dd")"
+                               required />
+                    </div>
+
+                    <!-- Start and End Time -->
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label for="StartTime">Start Time</label>
+
+                                <input type="time"
+                                       id="StartTime"
+                                       name="StartTime"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label for="EndTime">End Time</label>
+
+                                <input type="time"
+                                       id="EndTime"
+                                       name="EndTime"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Number of Passengers -->
+                    <div class="form-group mb-4">
+                        <label for="NumberOfPassengers">
+                            Number of Passengers
+                        </label>
+
+                        <input type="number"
+                               id="NumberOfPassengers"
+                               name="NumberOfPassengers"
+                               class="form-control"
+                               min="1"
+                               max="100"
+                               value="1"
+                               required />
+                    </div>
+
+                    <!-- Special Request -->
+                    <div class="form-group mb-4">
+                        <label for="SpecialRequest">
+                            Special Request
+                            <small>(Optional)</small>
+                        </label>
+
+                        <textarea id="SpecialRequest"
+                                  name="SpecialRequest"
+                                  class="form-control"
+                                  rows="4"
+                                  maxlength="500"
+                                  placeholder="Enter any special requests here..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    if (hasAvailableBoats)
+                    {
+                        <button type="submit"
+                                class="btn btn-primary btn-lg booking-button">
+                            Continue Booking
+                        </button>
                     }
                     else
                     {
-                        <div class="alert alert-warning">
-                            <strong>No boats available.</strong>
-                            There are currently no approved boats available in this category.
-                        </div>
+                        <button type="button"
+                                class="btn btn-secondary btn-lg booking-button"
+                                disabled>
+                            No Boats Currently Available
+                        </button>
                     }
-                </div>
-
-                <br />
-
-                <div class="form-group">
-                    <label>Trip Date</label>
-
-                    <input type="date"
-                           class="form-control"
-                           name="TripDate"
-                           min="@DateTime.Today.ToString("yyyy-MM-dd")"
-                           required />
-                </div>
-
-                <br />
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-
-                            <label>Start Time</label>
-
-                            <input type="time"
-                                   class="form-control"
-                                   name="StartTime"
-                                   required />
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-
-                            <label>End Time</label>
-
-                            <input type="time"
-                                   class="form-control"
-                                   name="EndTime"
-                                   required />
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <br />
-
-                <div class="form-group">
-
-                    <label>Number of Passengers</label>
-
-                    <input type="number"
-                           class="form-control"
-                           name="NumberOfPassengers"
-                           min="1"
-                           max="100"
-                           value="1"
-                           required />
-
-                </div>
-
-                <br />
-
-                <div class="form-group">
-
-                    <label>Special Request <small>(Optional)</small></label>
-
-                    <textarea name="SpecialRequest"
-                              class="form-control"
-                              rows="4"
-                              maxlength="500"
-                              placeholder="Enter any special requests here..."></textarea>
-
-                </div>
-
-                <br />
-
-                if (ViewBag.AvailableBoats != null &&
-                     ViewBag.AvailableBoats.Count > 0)
-                {
-                    <button type="submit"
-                            class="btn btn-primary btn-lg"
-                            style="
-                                width:100%;
-                                background:#0088b8;
-                                border:none;
-                                border-radius:25px;
-                                padding:12px;
-                                font-weight:600;
-                            ">
-                        Continue Booking
-                    </button>
                 }
-                else
-                {
-                    <button type="button"
-                            class="btn btn-secondary btn-lg"
-                            disabled
-                            style="
-                                width:100%;
-                                border-radius:25px;
-                                padding:12px;
-                            ">
-                        No Boats Currently Available
-                    </button>
-                }
-            }
+
+            </div>
 
         </div>
-
     </div>
 
 </div>
+
+<style>
+    .brand-label {
+        color: #0088b8;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .page-title {
+        color: #003b5c;
+        font-weight: 700;
+        margin-top: 8px;
+    }
+
+    .page-subtitle {
+        color: #687982;
+        margin-bottom: 0;
+    }
+
+    .booking-card {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 59, 92, 0.12);
+        border: 1px solid #e6f0f4;
+    }
+
+    .boat-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background: #e6f7fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+    }
+
+    .boat-category {
+        color: #003b5c;
+        font-weight: 700;
+    }
+
+    .boat-description {
+        color: #687982;
+        margin-bottom: 15px;
+    }
+
+    .boat-price {
+        color: #0088b8;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .price-label {
+        color: #7b8b92;
+    }
+
+    .selected-category {
+        border-radius: 10px;
+    }
+
+    .form-group label {
+        color: #003b5c;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border: 1px solid #d7e6eb;
+        border-radius: 10px;
+        padding: 11px 14px;
+    }
+
+    .form-control:focus {
+        border-color: #0088b8;
+        box-shadow: 0 0 0 0.2rem rgba(0, 136, 184, 0.15);
+    }
+
+    .booking-button {
+        width: 100%;
+        border: none;
+        border-radius: 25px;
+        padding: 12px;
+        font-weight: 600;
+    }
+
+    .booking-button.btn-primary {
+        background: #0088b8;
+    }
+
+    .booking-button.btn-primary:hover {
+        background: #006f99;
+    }
+
+    @@media (max-width: 576px) {
+        .booking-card {
+            padding: 25px 20px;
+        }
+
+        .page-title {
+            font-size: 30px;
+        }
+    }
+</style>
