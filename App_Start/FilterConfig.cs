@@ -5,9 +5,9 @@ namespace HarborConnect
 {
     public class FilterConfig
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        public static void RegisterGlobalFilters(GlobalFilterCollection globalFilters)
         {
-            filters.Add(new HandleErrorAttribute());
+            globalFilters.Add(new HandleErrorAttribute());
         }
     }
 }
