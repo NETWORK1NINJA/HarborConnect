@@ -442,44 +442,64 @@ namespace HarborConnect.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+ ```csharp
+//
+// POST: /Account/Register
+[HttpPost]
+[AllowAnonymous]
+[ValidateAntiForgeryToken]
+public async Task<ActionResult> Register(RegisterViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        var user = new ApplicationUser
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
+            UserName = model.Email,
+            Email = model.Email
+        };
 
-            if (ModelState.IsValid)
-            {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
-            }
+        var result = await UserManager.CreateAsync(user, model.Password);
 
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+        if (result.Succeeded)
+        {
+            // Assign every normal registration to Customer
+            await UserManager.AddToRoleAsync(user.Id, "Customer");
+
+            // Generate email confirmation token
+            var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+            // Create confirmation link
+            var callbackUrl = Url.Action(
+                "ConfirmEmail",
+                "Account",
+                new
+                {
+                    userId = user.Id,
+                    code = code
+                },
+                protocol: Request.Url.Scheme
+            );
+
+            // Send confirmation email
+            await UserManager.SendEmailAsync(
+                user.Id,
+                "Confirm your HarborConnect account",
+                "Welcome to HarborConnect. Please confirm your account by clicking <a href=\""
+                + callbackUrl
+                + "\">Confirm Account</a>."
+            );
+
+            // Do not automatically sign in.
+            // The customer must confirm their email first.
+            return View("ConfirmEmailSent");
         }
+
+        AddErrors(result);
+    }
+
+    return View(model);
+}
+
 
         //
         // POST: /Account/LogOff
