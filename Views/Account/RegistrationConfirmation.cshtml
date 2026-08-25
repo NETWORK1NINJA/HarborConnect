@@ -1,0 +1,32 @@
+html
+@{
+    ViewBag.Title = "Confirm Your Email";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">Registration Successful</h2>
+
+    <div>
+        <p>
+            Your HarborConnect account has been created successfully.
+        </p>
+
+        <p>
+            We have sent a confirmation link to your email address.
+            Please check your email and click the link to activate your account.
+        </p>
+
+        <p>
+            You must confirm your email before logging into HarborConnect.
+        </p>
+
+        @Html.ActionLink(
+            "Return to Login",
+            "Login",
+            "Account",
+            routeValues: null,
+            htmlAttributes: new { id = "loginLink" }
+        )
+    </div>
+</main>
+  
