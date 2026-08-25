@@ -13,24 +13,26 @@ using Microsoft.Owin.Security;
 using HarborConnect.Models;
 
 namespace HarborConnect
+{ 
+public class EmailService : IIdentityMessageService
 {
-    public class EmailService : IIdentityMessageService
+    public async Task SendAsync(IdentityMessage message)
     {
-        public Task SendAsync(IdentityMessage message)
+        using (var client = new System.Net.Mail.SmtpClient())
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
-        }
-    }
+            var mail = new System.Net.Mail.MailMessage(
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+                message.Destination,
+                message.Subject,
+                message.Body
+            );
+
+            mail.IsBodyHtml = true;
+
+            await client.SendMailAsync(mail);
         }
     }
+}
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
