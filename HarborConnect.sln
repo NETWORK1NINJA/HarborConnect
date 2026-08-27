@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37301.10 d17.14
+VisualStudioVersion = 17.14.37301.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarborConnect", "HarborConnect.csproj", "{5E4DEE5D-8428-4CCB-84B3-3B3D2437A7D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarborConnect.Tests", "..\HarborConnect.Tests\HarborConnect.Tests.csproj", "{9E395384-D038-4E2B-B5B0-EDC5CC5F27EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5E4DEE5D-8428-4CCB-84B3-3B3D2437A7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4DEE5D-8428-4CCB-84B3-3B3D2437A7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4DEE5D-8428-4CCB-84B3-3B3D2437A7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E395384-D038-4E2B-B5B0-EDC5CC5F27EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E395384-D038-4E2B-B5B0-EDC5CC5F27EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E395384-D038-4E2B-B5B0-EDC5CC5F27EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E395384-D038-4E2B-B5B0-EDC5CC5F27EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
